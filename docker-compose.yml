@@ -1,0 +1,28 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
+version: '3'
+services:
+  docker-mockjs:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: trieuvo/swagger-mock
+    working_dir: /workspace
+    volumes:
+      # Update this to wherever you want VS Code to mount the folder of your project
+      - .:/workspace
+
+
+    # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
+    # cap_add:
+    #  - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined
+
+    # Overrides default command so things don't shut down after the process ends.
+    ports: 
+      - 3301:3301
+    command: ["npm", "start"]
